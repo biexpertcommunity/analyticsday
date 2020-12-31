@@ -1,0 +1,26 @@
+function enviarInvitaciones() {
+var ss = SpreadsheetApp.getActiveSpreadsheet();
+ss.setActiveSheet(ss.getSheetByName("saludo"));
+var sheet = SpreadsheetApp.getActiveSheet();
+var dataRange = sheet.getRange("B3:E4");
+var data = dataRange.getValues();
+for (i in data) {
+var rowData = data[i];
+var correo = rowData[1];
+var nombre = rowData[0];
+var mensaje1 = rowData[2];
+var archivo = rowData[3];
+var mensaje = 'Estimada/o ' + nombre + ',\n\n' + mensaje1 + ',\n\n' + archivo;
+var asunto = '[Invitada] :: Chocolatada Navidad';
+ 
+//MailApp.sendEmail(correo, asunto, mensaje);
+//}
+//}
+
+  var aliases = GmailApp.getAliases()
+  Logger.log(aliases); //returns the list of aliases you own 
+  Logger.log(aliases[0]); //returns the alias located at position 0 of the aliases array: rosa.soto@witperu.org
+
+  GmailApp.sendEmail(correo , asunto, mensaje, {'from': aliases[0]});
+ }
+}
